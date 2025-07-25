@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body {
+      height: 100vh;
+      width: 100%;
+    }
+    .container {
+      height: 100%;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+    }
+    form {
+      max-width: 600px;
+      width: 600px;
+      min-height: 220px;
+      padding: 20px 40px;
+      background-color: rgb(233, 232, 232);
+      box-sizing: border-box;
+      position: relative;
+    }
+    .form-control {
+      width: 100%;
+      display: flex;
+      /* flex-direction: column; */
+      align-items: center;
+      gap: 5px;
+      margin: 30px 0;
+    }
+    .form-control input {
+      flex: 1;
+      border: 1px solid rgb(211, 211, 211);
+      border-radius: 4px;
+      height: 30px;
+      padding: 0 10px;
+      font-size: 15px;
+      color: rgb(90, 90, 90);
+      font-weight: 600;
+    }
+    .form-control label {
+      width: 150px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .form-control input:focus {
+      outline: none;
+    }
+    .center {
+      text-align: center !important;
+    }
+    .m-y-1-6 {
+      margin-top: 10px;
+      margin-bottom: 60px;
+    }
+
+    .form-action {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+    }
+
+    .btn {
+      border: none;
+      height: 40px;
+      padding: 0 20px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .btn.primary {
+      color: white;
+      background-color: rgb(0, 90, 207);
+    }
+    .btn.primary:hover {
+      color: white;
+      background-color: rgb(0, 78, 180);
+    }
+  </style>
+  <body>
+    <div class="container">
+      <form action="/user/login" method="post">
+        <h1 class="center m-y-1-6">Login and Move Forward</h1>
+        <div class="form-control">
+          <label for="email">User ID</label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" />
+        </div>
+        <div class="form-action">
+          <button class="btn primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

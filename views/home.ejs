@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0 auto;
+        height: 100vh;
+      }
+      .container {
+        box-sizing: border-box;
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        row-gap: 50px;
+        align-items: center;
+        background: rgb(214, 240, 255);
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        max-width: 450px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 30px;
+      }
+      input {
+        width: 100%;
+        max-width: 500px;
+        min-width: 200px;
+        box-sizing: border-box;
+        height: 40px;
+        border-radius: 4px;
+        border: 1px solid rgb(187, 187, 187);
+        padding: 0 10px;
+      }
+      input:focus {
+        outline: 2px solid rgb(78, 175, 255);
+      }
+      button {
+        max-width: max-content;
+        margin: 0;
+        padding: 12px 8px;
+        border: none;
+        border-radius: 3px;
+        background-color: #025fca;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s ease-in-out box-shadow;
+      }
+      button:hover {
+        box-shadow: 0 0 6px 0px rgb(0, 0, 0);
+      }
+      .url {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid rgb(187, 187, 187);
+        cursor: pointer;
+        opacity: 0.6;
+      }
+      .url:hover {
+        opacity: 1;
+      }
+      .popup {
+        max-width: max-content;
+        padding: 10px;
+        border: 1px solid rgb(114, 255, 109);
+        background-color: rgb(227, 255, 227);
+        color: rgb(7, 77, 7);
+        position: absolute;
+        top: -50px;
+        left: 45%;
+        animation-name: Popup;
+        animation-duration: 1s;
+      }
+      .ready {
+        color: rgb(22, 150, 22);
+        margin-bottom: 20px;
+      }
+      @keyframes Popup {
+        0% {
+          top: 0px;
+        }
+        100% {
+          top: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Generate Short Version of Your URL</h1>
+      <form method="post" action="/url">
+        <input
+          type="url"
+          name="url"
+          id="url"
+          placeholder="www.generate-short-url.com/service/short-url"
+        />
+        <button type="submit">Generate Short URL</button>
+      </form>
+      <% if (generatedURL) { %>
+      <div class="generatedURL">
+        <h4 class="ready">Short URL Ready — Click to Copy!</h4>
+        <div class="url" onclick="copyURL(event)" title="Click to copy!">
+          <%= generatedURL %>
+        </div>
+      </div>
+      <div id="popup" class="popup" style="display: none">URL Copied!</div>
+      <% } %> <% if(userDetails?.length) { %>
+
+      <div class="analytics">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>SR.</th>
+              <th>ShortID</th>
+              <th>Original URL</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% userDetails?.forEach((element, index) => { %>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%= element?.shortURL %></td>
+              <td><%= element?.redirectURL %></td>
+              <td><%= element?.visitHistory?.length %></td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+
+      <% } %>
+    </div>
+
+    <script>
+      function copyURL(event) {
+        const popup = document.getElementById("popup");
+        navigator.clipboard.writeText(event.target.textContent);
+        popup.style.display = "block";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 3 * 1000);
+      }
+
+      function showPopup(timeout) {}
+    </script>
+  </body>
+</html>
